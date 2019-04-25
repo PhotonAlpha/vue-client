@@ -12,6 +12,7 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuex": "^3.0.1",
+    "webpack": "^4.28.4",
     "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
