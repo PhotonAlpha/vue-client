@@ -7,7 +7,7 @@ import SubTest2 from './views/SubTest2.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -22,7 +22,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      component: () => import(/* webpackChunkName: 'about' */ './views/About.vue')
     },
     {
       path: '/test',
@@ -47,7 +47,20 @@ export default new Router({
           path: 'sub2',
           component: SubTest2
         }
-      ]
+      ],
+      beforeEnter: (to, from, next) => {
+        console.log(to, from, next);
+        next();
+
+        //next(false) will not allow
+      }
     }
   ]
 })
+
+// router.afterEach((to, from) => {
+//   console.log('routeGrad');
+//   console.log(to, from);
+// })
+
+export default router;
