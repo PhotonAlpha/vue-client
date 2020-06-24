@@ -1,6 +1,37 @@
 <template>
   <div>
-    <li v-for="user in userList" :key="user.id">{{ user.name }}</li>
+    <el-card class="box-card">
+      <div slot="header" class="item-title">
+        <span>最新文章</span>
+      </div>
+      <el-collapse v-model="activeName" accordion>
+        <el-collapse-item title="RPC" name="1" class="item-header">
+          <div>DUBBO 迈向云原生的里程碑 | 应用级服务发现</div>
+          <div class="item-date">2020-06-16</div>
+        </el-collapse-item>
+        <el-collapse-item title="ARTHAS" name="2" class="item-header">
+          <div>平滑迁移 DUBBO 服务的思考</div>
+          <div class="item-date">2020-05-30</div>
+        </el-collapse-item>
+        <el-collapse-item title="技术杂谈" name="3">
+          <div>ARTHAS | 定位线上 DUBBO 线程池满异常</div>
+          <div class="item-date">2020-02-16</div>
+        </el-collapse-item>
+      </el-collapse>
+    </el-card>
+    <el-card class="box-card">
+      <div slot="header">
+        <span>分类</span>
+      </div>
+      <div>
+        <el-tree
+          :data="data"
+          :props="defaultProps"
+          accordion
+          @node-click="handleNodeClick"
+        />
+      </div>
+    </el-card>
   </div>
 </template>
 
@@ -9,89 +40,49 @@ export default {
   name: 'ArchiveRight',
   data() {
     return {
-      userList: [{ id: 1, name: 'test:1' },
-        { id: 2, name: 'test:2' },
-        { id: 3, name: 'test:3' },
-        { id: 4, name: 'test:4' },
-        { id: 5, name: 'test:5' },
-        { id: 6, name: 'test:11' },
-        { id: 7, name: 'test:21' },
-        { id: 8, name: 'test:31' },
-        { id: 9, name: 'test:41' },
-        { id: 10, name: 'test:51' },
-        { id: 11, name: 'test:61' },
-        { id: 12, name: 'test:71' },
-        { id: 13, name: 'test:81' },
-        { id: 14, name: 'test:91' },
-        { id: 15, name: 'test:111' },
-        { id: 16, name: 'test:121' },
-        { id: 17, name: 'test:1231' },
-        { id: 18, name: 'test:1211' },
-        { id: 19, name: 'test:211' },
-        { id: 20, name: 'test:211' },
-        { id: 21, name: 'test:211' },
-        { id: 22, name: 'test:211' },
-        { id: 23, name: 'test:211' },
-        { id: 24, name: 'test:211' },
-        { id: 25, name: 'test:211' },
-        { id: 26, name: 'test:211' },
-        { id: 27, name: 'test:211' },
-        { id: 28, name: 'test:211' },
-        { id: 29, name: 'test:211' },
-        { id: 30, name: 'test:dsa1' },
-        { id: 31, name: 'test:dsa1' },
-        { id: 32, name: 'test:dsa1' },
-        { id: 33, name: 'test:dsa1' },
-        { id: 34, name: 'test:dsa1' },
-        { id: 35, name: 'test:dsa1' },
-        { id: 36, name: 'test:dsa1' },
-        { id: 37, name: 'test:dsa1' },
-        { id: 38, name: 'test:dsa1' },
-        { id: 39, name: 'test:dsa1' },
-        { id: 40, name: 'test:dsa1' },
-        { id: 41, name: 'test:dsa1' },
-        { id: 42, name: 'test:dsa1' },
-        { id: 43, name: 'test:dsa1' },
-        { id: 44, name: 'test:dsa1' },
-        { id: 45, name: 'test:dsa1' },
-        { id: 46, name: 'test:dsa1' },
-        { id: 47, name: 'test:dsa1' },
-        { id: 48, name: 'test:dsa1' },
-        { id: 49, name: 'test:dsa1' },
-        { id: 50, name: 'test:dsa1' },
-        { id: 51, name: 'test:dsa1' },
-        { id: 52, name: 'test:dsa1' },
-        { id: 53, name: 'test:dsa1' },
-        { id: 54, name: 'test:dsa1' },
-        { id: 55, name: 'test:dsa1' },
-        { id: 56, name: 'test:dsa1' },
-        { id: 57, name: 'test:dsa1' },
-        { id: 58, name: 'test:dsa1' },
-        { id: 59, name: 'test:dsa1' },
-        { id: 60, name: 'test:dsa1' },
-        { id: 61, name: 'test:dsa1' },
-        { id: 62, name: 'test:dsa1' },
-        { id: 63, name: 'test:dsa1' },
-        { id: 64, name: 'test:dsa1' },
-        { id: 65, name: 'test:dsa1' },
-        { id: 66, name: 'test:dsa1' },
-        { id: 67, name: 'test:dsa1' },
-        { id: 68, name: 'test:dsa1' },
-        { id: 69, name: 'test:dsa1' },
-        { id: 70, name: 'test:dsa1' },
-        { id: 71, name: 'test:dsa1' },
-        { id: 72, name: 'test:dsa1' },
-        { id: 73, name: 'test:dsa1' },
-        { id: 74, name: 'test:dsa1' },
-        { id: 75, name: 'test:dsa1' },
-        { id: 76, name: 'test:dsa1' },
-        { id: 77, name: 'test:dsa1' },
-        { id: 78, name: 'test:dsa1' },
-        { id: 79, name: 'test:dsa1----------end' }]
+      activeName: '1',
+      data: [{
+        label: 'Docker',
+        children: [{
+          label: 'Docker Network—Bridge 模式'
+        }]
+      }, {
+        label: 'JAVA',
+        children: [{
+          label: 'Dubbo 迈向云原生的里程碑 | 应用级服务发现'
+        }, {
+          label: '平滑迁移 Dubbo 服务的思考'
+        }]
+      }],
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      }
+    }
+  },
+  methods: {
+    handleNodeClick(data) {
+      console.log(data)
     }
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scope>
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,700");
+
+.item-title {
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+}
+.item-header .el-collapse-item__header {
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+}
+
+.item-date {
+  color: #aaa;
+  font-size: 13px;
+  text-transform: uppercase;
+}
 
 </style>

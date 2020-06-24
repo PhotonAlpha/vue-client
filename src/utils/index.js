@@ -1,8 +1,4 @@
 /**
- * Created by PanJiaChen on 16/11/18.
- */
-
-/**
  * Parse the time to string
  * @param {(Object|string|number)} time
  * @param {string} cFormat
@@ -104,4 +100,32 @@ export function param2Obj(url) {
         .replace(/\+/g, ' ') +
       '"}'
   )
+}
+
+export function reconstructorTitle(tree = []) {
+  const pattern = /^[0-9]{4}[-]{1}[0-9]{1,2}[-]{1}[0-9]{1,2}/
+  let blogdatas = []
+  if (tree && tree.length > 0) {
+    const items = tree
+    blogdatas = items.filter(item => {
+      const match = pattern.exec(item.path)
+      return match && item.type === 'blob'
+    }).map(item => {
+      const name = item.path
+      const match = pattern.exec(name)
+      const blogname = name.substring(match[0].length + 1, name.length).replace('.md', '')
+      return {
+        name: blogname,
+        date: Date.parse(match[0].replace(/-/g, '/')),
+        path: item.path,
+        git_url: item.url,
+        sha: item.sha,
+        type: item.type
+      }
+    })
+    blogdatas.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date)
+    })
+  }
+  return blogdatas
 }

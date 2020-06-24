@@ -1,7 +1,7 @@
 import Trianglify from 'trianglify'
 
 export default function getTrianglify(wid = 200, hei = 200, minimalSize = 60) {
-  console.log('function getTrianglify', wid, hei, minimalSize)
+  // console.log('function getTrianglify', wid, hei, minimalSize)
   const url = Trianglify({
     width: wid,
     height: hei,
@@ -9,6 +9,6 @@ export default function getTrianglify(wid = 200, hei = 200, minimalSize = 60) {
     xColors: 'random',
     yColors: 'random'
   }).toCanvas()
-  console.log(url)
+  // console.log(url)
   return url
 }

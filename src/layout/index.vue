@@ -17,7 +17,7 @@
                 <profile />
               </el-scrollbar>
             </el-col>
-            <el-col :span="12" :offset="6" style="background: #fff">
+            <el-col :span="12" :offset="6">
               <app-main />
             </el-col>
             <el-col :span="5" :offset="18" class="right-side-cnt">
@@ -176,9 +176,7 @@ export default {
     top: 20px;
   }
   .right-side-cnt {
-    height: 80vh;
     overflow: hidden;
-    background: antiquewhite;
     position: fixed;
   }
   #mainContent {

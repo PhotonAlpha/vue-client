@@ -3,10 +3,12 @@ import { param2Obj } from '../src/utils'
 
 import user from './user'
 import table from './table'
+import githubApi from './github-tree'
 
 const mocks = [
   ...user,
-  ...table
+  ...table,
+  ...githubApi
 ]
 
 // for front mock

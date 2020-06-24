@@ -19,12 +19,6 @@
               Home
             </el-dropdown-item>
           </router-link>
-          <a target="_blank" href="https://github.com/PanJiaChen/vue-admin-template/">
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">Log Out</span>
           </el-dropdown-item>
@@ -37,13 +31,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb' // 面包屑
-import Hamburger from '@/components/Hamburger' // 导航栏
 import LangSelect from '@/components/LangSelect' // 多语言
 
 export default {
   components: {
     Breadcrumb,
-    Hamburger,
     LangSelect
   },
   computed: {

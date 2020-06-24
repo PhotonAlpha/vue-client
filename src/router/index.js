@@ -61,9 +61,16 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: '/springboot',
+        path: 'index',
         name: 'Spring Boot',
         component: () => import('@/views/dashboard/index'),
+        meta: { title: 'springboot', icon: 'fas fa-seedling' }
+      },
+      {
+        path: ':sha',
+        hidden: true,
+        name: 'spring-boot-details',
+        component: () => import('@/views/details/index'),
         meta: { title: 'springboot', icon: 'fas fa-seedling' }
       }
     ]
@@ -75,7 +82,7 @@ export const constantRoutes = [
       {
         path: '/about',
         name: 'About',
-        component: () => import('@/views/dashboard/index'),
+        component: () => import('@/views/about/index'),
         meta: { title: 'about', icon: 'fas fa-bullseye' }
       }
     ]

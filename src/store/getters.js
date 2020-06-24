@@ -4,6 +4,12 @@ const getters = {
   device: state => state.app.device,
   token: state => state.user.token,
   avatar: state => state.user.avatar,
-  name: state => state.user.name
+  name: state => state.user.name,
+  masterTreeItems: state => state.githubApi.masterTreeItems,
+  nodeTreeItems: state => state.githubApi.nodeTreeItems,
+  issues: state => state.githubApi.issues,
+  comments: state => state.githubApi.comments,
+  comment: state => state.githubApi.comment,
+  blog: state => state.githubApi.blog
 }
 export default getters

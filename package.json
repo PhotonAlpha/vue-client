@@ -14,11 +14,13 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "@toast-ui/vue-editor": "^2.2.0",
     "axios": "0.18.1",
     "element-ui": "2.13.0",
     "github-markdown-css": "^4.0.0",
     "js-base64": "^2.5.2",
     "js-cookie": "2.2.0",
+    "moment": "^2.27.0",
     "normalize.css": "7.0.0",
     "nprogress": "0.2.0",
     "path-to-regexp": "2.4.0",

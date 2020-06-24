@@ -6,7 +6,7 @@
 import Blog from '@/components/Blog'
 
 export default {
-  name: 'AboutApp',
+  name: 'Details',
   components: {
     Blog
   },
@@ -20,7 +20,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-
-</style>

@@ -56,7 +56,7 @@ export default {
     ]),
     routes() {
       const rawRoutes = this.$router.options.routes
-      console.log('rawRoutes', rawRoutes)
+      // console.log('rawRoutes', rawRoutes)
       const menuOptionsLeft = []
       if (rawRoutes) {
         rawRoutes.filter(item => !item.hidden).forEach(item => this.combination(item, menuOptionsLeft))
@@ -92,7 +92,7 @@ export default {
         !item.alwaysShow
       const oneChild = oneShowingChild.onlyOneChild
       if (oneShow && oneChild.meta) {
-        console.log('oneShowingChild', oneChild)
+        // console.log('oneShowingChild', oneChild)
         menuOptionsLeft.push(this.singlePathMetaData(oneChild, item.path))
       } else {
         const subMenuOptions = []
@@ -102,7 +102,7 @@ export default {
         menuOptionsLeft.push({ type: 'link', text: this.generateTitle(item.meta.title), subMenuOptions: subMenuOptions, iconLeft: `<i class="${item.meta.icon || 'fas fa-tachometer-alt'}"></i>` })
       }
       // console.log('item', item)
-      console.log('menuOptionsLeft', menuOptionsLeft)
+      // console.log('menuOptionsLeft', menuOptionsLeft)
       return menuOptionsLeft
     },
     singlePathMetaData(item = { path: '/' }, basePath) {

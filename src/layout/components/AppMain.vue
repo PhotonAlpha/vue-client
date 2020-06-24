@@ -1,14 +1,21 @@
 <template>
-  <section class="app-main">
-    <transition name="fade-transform" mode="out-in">
-      <router-view :key="key" />
-    </transition>
-  </section>
+  <div>
+    <section class="app-main">
+      <transition name="fade-transform" mode="out-in">
+        <router-view :key="key" />
+      </transition>
+    </section>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'AppMain',
+  data() {
+    return {
+      textarea: ''
+    }
+  },
   computed: {
     key() {
       return this.$route.path
@@ -24,8 +31,10 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
+  background: transparent;
+  margin-bottom: 50px;
 }
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
 }
 </style>
