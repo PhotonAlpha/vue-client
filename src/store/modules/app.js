@@ -8,7 +8,10 @@ const state = {
     withoutAnimation: false
   },
   device: 'desktop',
-  language: getLanguage()
+  language: getLanguage(),
+  postDirectory: {},
+  category: [],
+  latestRecommend: []
 }
 
 const mutations = {
@@ -32,6 +35,15 @@ const mutations = {
   SET_LANGUAGE: (state, language) => {
     state.language = language
     Cookies.set('language', language)
+  },
+  SET_POST_DIRECTORY: (state, data) => {
+    state.postDirectory = data
+  },
+  SET_CATEGORY: (state, data) => {
+    state.category = data
+  },
+  SET_LATEST_RECOMMEND: (state, data) => {
+    state.latestRecommend = data
   }
 }
 
@@ -47,6 +59,15 @@ const actions = {
   },
   setLanguage({ commit }, language) {
     commit('SET_LANGUAGE', language)
+  },
+  setPostDirectory({ commit }, data) {
+    commit('SET_POST_DIRECTORY', data)
+  },
+  setCategory({ commit }, data) {
+    commit('SET_CATEGORY', data)
+  },
+  setLatestRecommend({ commit }, data) {
+    commit('SET_LATEST_RECOMMEND', data)
   }
 }
 

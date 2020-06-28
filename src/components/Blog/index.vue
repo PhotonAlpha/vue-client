@@ -1,7 +1,7 @@
 <template>
   <div>
     <template v-if="blogVal">
-      <vue-markdown class="dashboard-container markdown-body">{{ blogVal }}</vue-markdown>
+      <vue-markdown id="markdown-content" class="dashboard-container markdown-body">{{ blogVal }}</vue-markdown>
       <comment />
     </template>
     <template v-else>

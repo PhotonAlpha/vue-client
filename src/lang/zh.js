@@ -1,6 +1,14 @@
 export default {
   route: {
     dashboard: '首页',
+    spring: 'Spring',
+    springboot: 'Spring Boot',
+    springcloud: 'Spring Cloud',
+    docker: 'Docker',
+    javascript: 'JavaScript 框架',
+    vue: 'Vue JS',
+    react: 'React JS',
+    about: '关于我',
     documentation: '文档',
     guide: '引导页',
     permission: '权限测试页',

@@ -38,3 +38,11 @@ export function createIssue(data) {
     data
   })
 }
+
+// 查询日志内容
+export function getBlog(sha) {
+  return request({
+    url: `/repos/PhotonAlpha/blogs/git/blobs/${sha}`,
+    method: 'get'
+  })
+}

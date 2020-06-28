@@ -44,7 +44,7 @@ export default {
   methods: {
     showDetails(sha) {
       console.log('showDetails', sha)
-      this.$router.push({ name: 'spring-boot-details', params: { sha: '348f439d9ed283201b9cc190124edb9318f8f068' }})
+      this.$router.push({ name: 'spring-details', params: { sha: '348f439d9ed283201b9cc190124edb9318f8f068' }})
     },
     handleCurrentChange(val) {
       this.$emit('getPageNum', val)

@@ -1,34 +1,34 @@
 <template>
   <div :class="classObj" class="app-wrapper">
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
-    <el-scrollbar ref="mainScrollbar" class="page-component__scrollbar">
-      <el-container>
-        <el-header :style="styleTrianglify">
-          <sidebar />
-        </el-header>
-        <el-main id="mainContent">
-          <!-- 面包屑
+    <!-- <el-scrollbar ref="mainScrollbar" class="page-component__scrollbar"> -->
+    <el-container ref="mainScrollbar">
+      <el-header :style="styleTrianglify">
+        <sidebar />
+      </el-header>
+      <el-main id="mainContent">
+        <!-- 面包屑
           <el-row type="flex" :class="{'fixed-header':fixedHeader}">
             <navbar style="width: 100%;" />
           </el-row> -->
-          <el-row type="flex">
-            <el-col id="side-cnt" class="side-cnt" :class="{'side-cnt-scrolled': isLeftSideScrolled}" :span="5" :push="1">
-              <el-scrollbar class="page-component__scrollbar">
-                <profile />
-              </el-scrollbar>
-            </el-col>
-            <el-col :span="12" :offset="6">
-              <app-main />
-            </el-col>
-            <el-col :span="5" :offset="18" class="right-side-cnt">
-              <el-scrollbar class="page-component__scrollbar">
-                <archive-right />
-              </el-scrollbar>
-            </el-col>
-          </el-row>
-        </el-main>
-      </el-container>
-    </el-scrollbar>
+        <el-row type="flex">
+          <el-col id="side-cnt" class="side-cnt" :class="{'side-cnt-scrolled': isLeftSideScrolled}" :span="5" :push="1">
+            <el-scrollbar class="page-component__scrollbar">
+              <profile />
+            </el-scrollbar>
+          </el-col>
+          <el-col :span="12" :offset="6">
+            <app-main />
+          </el-col>
+          <el-col :span="5" :offset="18" class="right-side-cnt" :class="{'side-cnt-scrolled': isLeftSideScrolled}">
+            <el-scrollbar class="page-component__scrollbar">
+              <archive-right @getCategoryList="handleLazyLoadCategory" @handlerCategory="handlerCategory" />
+            </el-scrollbar>
+          </el-col>
+        </el-row>
+      </el-main>
+    </el-container>
+    <!-- </el-scrollbar> -->
   </div>
 </template>
 
@@ -36,6 +36,8 @@
 import { Sidebar, AppMain, Profile, ArchiveRight } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import getTrianglify from '@/utils/generator'
+import { getDestinationTrees } from '@/api/githubApi'
+import { reconstructorTitle } from '@/utils'
 
 export default {
   name: 'Layout',
@@ -53,6 +55,9 @@ export default {
     }
   },
   computed: {
+    category() {
+      return this.$store.getters.category
+    },
     sidebar() {
       return this.$store.state.app.sidebar
     },
@@ -86,14 +91,45 @@ export default {
     },
     handleTabFix() {
       const mainOffsetTop = document.querySelector('#mainContent').offsetTop
-      const scrollTop = this.$refs.mainScrollbar.wrap.scrollTop
-      // console.log('handleTabFix:', scrollTop, mainOffsetTop, sideOffsetTop)
+      // console.log('handleTabFix:', mainOffsetTop, document.documentElement.scrollTop)
+      const scrollTop = document.documentElement.scrollTop
+      // const scrollTop = this.$refs.mainScrollbar.wrap.scrollTop
       if (scrollTop > mainOffsetTop) {
         this.isfixTab = true
         this.isLeftSideScrolled = true
       } else {
         this.isfixTab = false
         this.isLeftSideScrolled = false
+      }
+    },
+    handleLazyLoadCategory(node, resolve) {
+      console.log('loadNode', node)
+      if (node.level === 0) {
+        return resolve(this.category)
+      }
+      if (node.level > 1) return resolve([])
+
+      const { sha } = node.data
+
+      getDestinationTrees(sha).then(response => {
+        const result = response
+        const blogItems = reconstructorTitle(result.tree)
+        console.log('blogItems', blogItems)
+        if (blogItems && blogItems.length > 0) {
+          const data = blogItems.map(item => {
+            return { label: item.name, subItem: true, sha: item.sha }
+          })
+          resolve(data)
+        }
+      })
+        .catch(error => {
+          console.log('error occur', error)
+        })
+    },
+    handlerCategory(data) {
+      if (data && data.subItem) {
+        console.log('showDetails', data.sha)
+        this.$router.push({ name: 'spring-details', params: { sha: '348f439d9ed283201b9cc190124edb9318f8f068' }})
       }
     }
   },
@@ -116,7 +152,7 @@ export default {
   .app-wrapper {
     @include clearfix;
     position: relative;
-    height: 100%;
+    // height: 100%;
     // width: 100%;
     // &.mobile.openSidebar{
     //   position: fixed;
@@ -173,11 +209,16 @@ export default {
     box-shadow: 11px 11px 12px 0 #90939994;
   }
   .side-cnt-scrolled {
-    top: 20px;
+    top: 20px !important;
   }
   .right-side-cnt {
+    top: 90px;
+    height: 80%;
     overflow: hidden;
     position: fixed;
+    transition: all 1.2s;
+    transition-timing-function: ease-in-out;
+    box-shadow: 11px 11px 12px 0 #90939994;
   }
   #mainContent {
     padding-top: 0px;

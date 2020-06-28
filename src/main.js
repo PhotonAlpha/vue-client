@@ -34,6 +34,9 @@ import 'vue-navigation-bar/dist/vue-navigation-bar.css'
 import VueNavigationBar from 'vue-navigation-bar'
 Vue.component('vue-navigation-bar', VueNavigationBar)
 
+const VueScrollTo = require('vue-scrollto')
+Vue.use(VueScrollTo)
+
 // set ElementUI lang to EN
 // Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明

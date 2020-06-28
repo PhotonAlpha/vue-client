@@ -1,6 +1,14 @@
 export default {
   route: {
     dashboard: 'Dashboard',
+    spring: 'Spring',
+    springboot: 'Spring Boot',
+    springcloud: 'Spring Cloud',
+    docker: 'Docker',
+    javascript: 'JavaScript Framework',
+    vue: 'Vue JS',
+    react: 'React JS',
+    about: 'About',
     documentation: 'Documentation',
     guide: 'Guide',
     permission: 'Permission',

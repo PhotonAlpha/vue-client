@@ -15,7 +15,8 @@
 
       <el-dropdown :span="1" style="margin: auto 0px;">
         <span class="el-dropdown-link">
-          <el-avatar :size="50" :src="avatar+'?imageView2/1/w/80/h/80'" /></span>
+          <el-avatar class="fa-spin" :size="50" :src="avatar+'?imageView2/1/w/80/h/80'" />
+        </span>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/">
             <el-dropdown-item>
@@ -97,7 +98,9 @@ export default {
       } else {
         const subMenuOptions = []
         if (item.children) {
-          item.children.forEach(child => subMenuOptions.push(this.singlePathMetaData(child, item.path)))
+          item.children
+            .filter(child => !child.hidden)
+            .forEach(child => subMenuOptions.push(this.singlePathMetaData(child, item.path)))
         }
         menuOptionsLeft.push({ type: 'link', text: this.generateTitle(item.meta.title), subMenuOptions: subMenuOptions, iconLeft: `<i class="${item.meta.icon || 'fas fa-tachometer-alt'}"></i>` })
       }

@@ -34,7 +34,7 @@ export default {
   methods: {
     fetchMasterTrees() {
       this.$store.dispatch('githubApi/getMasterTreeItems').then(() => {
-        // console.log('fetchMasterTrees', this.$store.getters.masterTreeItems)
+        console.log('fetchMasterTrees', this.$store.getters.masterTreeItems)
         this.masterTreeItems = this.$store.getters.masterTreeItems
         if (this.masterTreeItems.tree && Array.isArray(this.masterTreeItems.tree)) {
           const array = ['navigation']
@@ -49,6 +49,7 @@ export default {
     fetchNodeTreeItems(sha) {
       this.$store.dispatch('githubApi/getNodeTreeItems', sha).then(() => {
         const result = this.$store.getters.nodeTreeItems
+        console.log('result', result)
         if (result.tree) {
           this.nodeTreeItems = this.nodeTreeItems.concat(result.tree)
           // console.log('this.nodeTreeItems', this.nodeTreeItems)
@@ -58,6 +59,7 @@ export default {
     fetchBlogTrees(sha) {
       this.$store.dispatch('githubApi/getNodeTreeItems', sha).then(() => {
         const result = this.$store.getters.nodeTreeItems
+        console.log('fetchBlogTrees', result)
         if (result.tree) {
           this.blogItems = reconstructorTitle(result.tree)
           console.log('this.blogItems', this.blogItems)
