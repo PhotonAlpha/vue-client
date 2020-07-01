@@ -1,9 +1,10 @@
 import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, getCommenterToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
   return {
+    commenterToken: getCommenterToken(),
     token: getToken(),
     name: '',
     avatar: '',
@@ -28,6 +29,9 @@ const mutations = {
   },
   SET_DETAILS: (state, details) => {
     state.details = details
+  },
+  SET_COMMENTER_TOKEN: (state, token) => {
+    state.commenterToken = token
   }
 }
 
@@ -46,12 +50,16 @@ const actions = {
       })
     })
   },
+  setCommenterToken({ commit }, token) {
+    setToken(token)
+    commit('SET_COMMENTER_TOKEN', token)
+  },
 
   // get user info
   getInfo({ commit, state }) {
     console.log('getInfo state', state)
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
+      getInfo(state.commenterToken).then(response => {
         console.log('getInfo', response)
         const { login, avatar_url } = response
 

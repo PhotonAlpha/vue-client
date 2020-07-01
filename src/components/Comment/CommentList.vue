@@ -1,47 +1,59 @@
 <template>
-  <el-card class="box-card">
+  <el-card v-if="currentIssue" class="comment-list-card">
     <div slot="header" class="clearfix">
-      <span>GraphQL 面向未来的API。Facebook 将其开源了一年多的 GraphQL 标记为 production ready ( http://graphql.org/blog/production-ready/ )，几乎同一时间，Github 开放了其 GraphQL API 的 early access ( GitHub GraphQL API )。两颗重磅炸弹先后落地，是否意味着已有五年多历史，和 Facebook 的 news feed 几乎同时诞生的 GraphQL 将在接下来的日子里大放异彩，逐渐取代 REST API 的地位？</span>
+      <span>{{ currentIssue.body }}</span>
     </div>
-    <div v-for="o in 4" :key="o" class="box-card-item">
-      <el-row type="flex" style="padding-bottom: 16px;">
-        <el-col :span="2">
-          <el-avatar class="box-avatar" shape="square" :size="'large'" :src="'https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png'" />
-        </el-col>
-        <el-col :span="20" class="box-card-border">
-          <el-card>
-            <div slot="header" class="box-card-border__header">
-              <el-link href="https://element.eleme.io" target="_blank">PhotonAlpha</el-link>
-              <span class="box-link-span">commented on  {{ timeFormat }}</span>
-            </div>
-            <div style="margin-left: 20px;">
-              我是留言
-            </div>
-            <div style="margin-top: 20px;">
-              <el-checkbox-group v-model="checkboxGroup4" size="mini">
-                <el-checkbox-button v-for="i in 8" :key="i" :label="i">
-                  <el-image :fit="'contain'" class="box-image-icon" src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png" />
-                  <span class="box-image-font">{{ o }}</span>
-                </el-checkbox-button>
-              </el-checkbox-group>
-            </div>
-          </el-card>
-        </el-col>
-      </el-row>
-    </div>
+    <template v-if="currentIssue.comments && currentIssue.comments.length > 0">
+      <div v-for="item in currentIssue.comments" :key="item.id" class="box-card-item">
+        <el-row type="flex" style="padding-bottom: 16px;">
+          <el-col :span="2">
+            <el-avatar class="box-avatar" shape="square" :size="'large'" :src="item.user.avatar_url" />
+          </el-col>
+          <el-col :span="22" class="box-card-border">
+            <el-card>
+              <div slot="header" class="box-card-border__header">
+                <el-link href="https://element.eleme.io" target="_blank">{{ item.user.login }}</el-link>
+                <span class="box-link-span">commented on  {{ formatDateTime(item.created_at) }}</span>
+              </div>
+              <div style="margin-left: 20px;">
+                <vue-markdown id="markdown-content" class="markdown-body">{{ item.body }}</vue-markdown>
+              </div>
+              <reaction :id="item.id" />
+            </el-card>
+          </el-col>
+        </el-row>
+      </div>
+    </template>
   </el-card>
 </template>
 <script>
 import moment from 'moment'
+import VueMarkdown from 'vue-markdown'
+import Reaction from '@/components/Comment/Reaction'
 
 export default {
   name: 'CommentList',
+  components: {
+    VueMarkdown,
+    Reaction
+  },
+  props: {
+    currentIssue: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
   data() {
     return {
       timeFormat: this.formatDateTime('2020-05-20T07:37:59Z'),
       checkboxGroup4: ['上海'],
       cities: ['上海', '北京', '广州', '深圳']
     }
+  },
+  computed: {
+
   },
   methods: {
     formatDateTime(date) {
@@ -80,14 +92,6 @@ export default {
 .box-avatar {
   float: left;
   margin-right: 20px;
-}
-.box-image-icon {
-  height: 18px;
-  width: 18px;
-}
-.box-image-font {
-  vertical-align: super;
-  font-size: medium;
 }
 
 .box-card-border {
@@ -142,7 +146,7 @@ export default {
 .box-card-border .el-card {
   .el-card__header {
     background-color: #f1f8ff;
-    padding: 8px 20px;
+    padding: 5px 20px;
   }
   .el-card__body {
     padding-bottom: 0px;

@@ -129,3 +129,5 @@ export function reconstructorTitle(tree = []) {
   }
   return blogdatas
 }
+
+export const CURRENT_TITLE = 'current_title'

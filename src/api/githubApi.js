@@ -46,3 +46,11 @@ export function getBlog(sha) {
     method: 'get'
   })
 }
+
+// 查询日志内容
+export function getCommentReactions(commentId) {
+  return request({
+    url: `/repos/PhotonAlpha/blogs/issues/comments/${commentId}/reactions`,
+    method: 'get'
+  })
+}

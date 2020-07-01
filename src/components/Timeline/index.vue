@@ -1,6 +1,6 @@
 <template>
   <div class="block">
-    <el-timeline>
+    <el-timeline v-if="tree && tree.length > 0">
       <el-timeline-item
         v-for="(item, index) in tree"
         :key="index"
@@ -12,7 +12,7 @@
         placement="top"
       >
         <el-card>
-          <el-link :underline="false" @click="showDetails(item.sha)"><h4>{{ item.name }}</h4></el-link>
+          <el-link :underline="false" @click="showDetails(item.sha, item.name)"><h4>{{ item.name }}</h4></el-link>
           <p><i class="el-icon-date" /> {{ handlerDateFormat(item.date) }}</p>
         </el-card>
       </el-timeline-item>
@@ -23,10 +23,19 @@
         :total="totalNum"
         @current-change="handleCurrentChange"
       />
-    </el-timeline></div>
+    </el-timeline>
+    <el-alert
+      v-else
+      title="未找到数据"
+      type="info"
+      :closable="false"
+    />
+  </div>
 </template>
 <script>
 import moment from 'moment'
+import { CURRENT_TITLE } from '@/utils'
+
 export default {
   name: 'Timeline',
   props: {
@@ -42,9 +51,10 @@ export default {
     }
   },
   methods: {
-    showDetails(sha) {
-      console.log('showDetails', sha)
-      this.$router.push({ name: 'spring-details', params: { sha: '348f439d9ed283201b9cc190124edb9318f8f068' }})
+    showDetails(sha, title) {
+      // console.log('showDetails', sha, title, CURRENT_TITLE)
+      localStorage.setItem(CURRENT_TITLE, title)
+      this.$router.push({ name: 'spring-details', params: { sha: sha }})
     },
     handleCurrentChange(val) {
       this.$emit('getPageNum', val)

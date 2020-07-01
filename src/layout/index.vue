@@ -12,15 +12,15 @@
             <navbar style="width: 100%;" />
           </el-row> -->
         <el-row type="flex">
-          <el-col id="side-cnt" class="side-cnt" :class="{'side-cnt-scrolled': isLeftSideScrolled}" :span="5" :push="1">
+          <el-col id="side-cnt" class="hidden-sm-only side-cnt" :class="{'side-cnt-scrolled': isLeftSideScrolled}" :md="5" :xs="0" :push="1">
             <el-scrollbar class="page-component__scrollbar">
               <profile />
             </el-scrollbar>
           </el-col>
-          <el-col :span="12" :offset="6">
+          <el-col :md="{span: 12, offset: 6}" :sm="{span: 24, offset: 0}" :xs="{span: 24, offset: 0}">
             <app-main />
           </el-col>
-          <el-col :span="5" :offset="18" class="right-side-cnt" :class="{'side-cnt-scrolled': isLeftSideScrolled}">
+          <el-col :md="{span: 5, offset: 18}" :xs="0" class="hidden-sm-only right-side-cnt" :class="{'side-cnt-scrolled': isLeftSideScrolled}">
             <el-scrollbar class="page-component__scrollbar">
               <archive-right @getCategoryList="handleLazyLoadCategory" @handlerCategory="handlerCategory" />
             </el-scrollbar>
@@ -38,6 +38,7 @@ import ResizeMixin from './mixin/ResizeHandler'
 import getTrianglify from '@/utils/generator'
 import { getDestinationTrees } from '@/api/githubApi'
 import { reconstructorTitle } from '@/utils'
+import { CURRENT_TITLE } from '@/utils/index'
 
 export default {
   name: 'Layout',
@@ -128,8 +129,9 @@ export default {
     },
     handlerCategory(data) {
       if (data && data.subItem) {
-        console.log('showDetails', data.sha)
-        this.$router.push({ name: 'spring-details', params: { sha: '348f439d9ed283201b9cc190124edb9318f8f068' }})
+        // console.log('handlerCategory', data, CURRENT_TITLE)
+        localStorage.setItem(CURRENT_TITLE, data.name)
+        this.$router.push({ name: 'spring-details', params: { sha: data.sha }})
       }
     }
   },
@@ -213,14 +215,22 @@ export default {
   }
   .right-side-cnt {
     top: 90px;
-    height: 80%;
+    height: 90%;
     overflow: hidden;
     position: fixed;
     transition: all 1.2s;
     transition-timing-function: ease-in-out;
-    box-shadow: 11px 11px 12px 0 #90939994;
   }
   #mainContent {
     padding-top: 0px;
+  }
+  .live2d{
+    position: fixed;
+    bottom: -30px;
+    right: 0px;
+    z-index: 999;
+    width: 150px;
+    height: 300px;
+    pointer-events: none;
   }
 </style>

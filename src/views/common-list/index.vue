@@ -54,7 +54,7 @@ export default {
         // console.log('this.nodeTreeItems', this.nodeTreeItems)
         if (this.nodeTreeItems && this.nodeTreeItems.length > 0) {
           const blogTreeItems = await this.fetchNodeTreeItems(this.nodeTreeItems[0].sha)
-          if (blogTreeItems.tree) {
+          if (blogTreeItems && blogTreeItems.tree) {
             this.blogItems = reconstructorTitle(blogTreeItems.tree)
             console.log('this.blogItems', this.blogItems)
             // 前三个日志为推荐选项

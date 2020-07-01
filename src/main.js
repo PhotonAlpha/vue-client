@@ -4,10 +4,12 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'element-ui/lib/theme-chalk/display.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 // import locale from 'element-ui/lib/locale/lang/en' // lang i18n
 
 import '@/styles/index.scss' // global css
+import 'github-markdown-css/github-markdown.css'
 
 import App from './App'
 import store from './store'

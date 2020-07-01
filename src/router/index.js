@@ -43,22 +43,23 @@ export const constantRoutes = [
     hidden: true
   },
 
+  // {
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/dashboard',
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       name: 'Dashboard',
+  //       component: () => import('@/views/dashboard/index'),
+  //       meta: { title: 'dashboard', icon: 'fas fa-tachometer-alt' }
+  //     }
+  //   ]
+  // },
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        name: 'Dashboard',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: 'dashboard', icon: 'fas fa-tachometer-alt' }
-      }
-    ]
-  },
-  {
-    path: '/blog',
-    component: Layout,
+    redirect: '/springboot',
     children: [
       {
         path: '/springboot',
@@ -67,7 +68,7 @@ export const constantRoutes = [
         meta: { title: 'springboot', icon: 'fas fa-seedling' }
       },
       {
-        path: ':sha',
+        path: '/blog/:sha',
         hidden: true,
         name: 'spring-details',
         component: () => import('@/views/details/index'),
@@ -94,7 +95,7 @@ export const constantRoutes = [
       {
         path: '/docker',
         name: 'docker',
-        component: () => import('@/views/springboot/index'),
+        component: () => import('@/views/docker/index'),
         meta: { title: 'docker', icon: 'fas fa-bolt' }
       }
     ]
@@ -107,14 +108,20 @@ export const constantRoutes = [
       {
         path: '/vue',
         name: 'vue-framework',
-        component: () => import('@/views/springboot/index'),
+        component: () => import('@/views/vue/index'),
         meta: { title: 'vue', icon: 'fas fa-seedling' }
       },
       {
         path: '/react',
         name: 'react-framework',
-        component: () => import('@/views/springboot/index'),
+        component: () => import('@/views/react/index'),
         meta: { title: 'react', icon: 'fas fa-bolt' }
+      },
+      {
+        path: '/react',
+        name: 'graphQL',
+        component: () => import('@/views/graphQL/index'),
+        meta: { title: 'graphQL', icon: 'fas fa-tape' }
       }
     ]
   },

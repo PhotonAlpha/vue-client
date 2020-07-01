@@ -2,7 +2,7 @@
   <div>
     <template v-if="blogVal">
       <vue-markdown id="markdown-content" class="dashboard-container markdown-body">{{ blogVal }}</vue-markdown>
-      <comment />
+      <comment :current-issue="currentIssue" @commitComment="commitComment" @sign="sign" />
     </template>
     <template v-else>
       <el-alert
@@ -29,6 +29,12 @@ export default {
     content: {
       type: String,
       default: ''
+    },
+    currentIssue: {
+      type: Object,
+      default() {
+        return {}
+      }
     }
   },
   computed: {
@@ -37,6 +43,14 @@ export default {
         return Base64.decode(this.content)
       }
       return ''
+    }
+  },
+  methods: {
+    commitComment(html) {
+      this.$emit('commitComment', html)
+    },
+    sign(action) {
+      this.$emit('sign', action)
     }
   }
 }

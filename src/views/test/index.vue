@@ -30,6 +30,8 @@
 </template>
 
 <script>
+// import { L2Dwidget } from 'live2d-widget/lib/L2Dwidget.min.js'
+
 export default {
   data() {
     return {
@@ -37,7 +39,19 @@ export default {
     }
   },
   created() {
-
+    // setTimeout(() => {
+    //   window.L2Dwidget.init({
+    //     pluginRootPath: 'public/static/live2dw/',
+    //     pluginJsPath: 'lib/',
+    //     pluginModelPath: 'live2d-widget-model-hijiki/assets/',
+    //     tagMode: false,
+    //     debug: false,
+    //     model: { jsonPath: '../static/live2dw/live2d-widget-model-hijiki/assets/hijiki.model.json' },
+    //     display: { position: 'right', width: 300, height: 650 },
+    //     mobile: { show: true },
+    //     log: false
+    //   })
+    // }, 1000)
   },
   methods: {
     scollerTo() {

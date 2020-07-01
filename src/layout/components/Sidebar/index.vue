@@ -12,8 +12,8 @@
         <!-- 设置多语言 -->
         <lang-select class="right-menu-item hover-effect" />
       </el-col>
-
-      <el-dropdown :span="1" style="margin: auto 0px;">
+      <!-- 登录之后显示用户信息，如果需要，可以添加 -->
+      <!-- <el-dropdown :span="1" style="margin: auto 0px;">
         <span class="el-dropdown-link">
           <el-avatar class="fa-spin" :size="50" :src="avatar+'?imageView2/1/w/80/h/80'" />
         </span>
@@ -27,13 +27,13 @@
             <span style="display:block;">Log Out</span>
           </el-dropdown-item>
         </el-dropdown-menu>
-      </el-dropdown>
+      </el-dropdown> -->
     </el-row>
   </section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+// import { mapGetters } from 'vuex'
 import variables from '@/styles/variables.scss'
 import { generateTitle } from '@/utils/i18n'
 import path from 'path'
@@ -50,11 +50,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'sidebar',
-      'avatar',
-      'device'
-    ]),
+    // ...mapGetters([
+    //   'sidebar',
+    //   'avatar',
+    //   'device'
+    // ]),
     routes() {
       const rawRoutes = this.$router.options.routes
       // console.log('rawRoutes', rawRoutes)

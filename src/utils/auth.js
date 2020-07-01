@@ -21,13 +21,14 @@ export function getToken() {
 }
 
 export function getCommenterToken() {
-  return Cookies.get(commenterTokenKey)
+  return sessionStorage.getItem(commenterTokenKey)
 }
 
 export function setToken(token) {
-  return Cookies.set(commenterTokenKey, token)
+  return sessionStorage.setItem(commenterTokenKey, token)
 }
 
 export function removeToken() {
-  return Cookies.remove(commenterTokenKey)
+  sessionStorage.removeItem(commenterTokenKey)
 }
+export const COMMENTER_TOKEN_KEY = commenterTokenKey

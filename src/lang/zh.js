@@ -8,6 +8,7 @@ export default {
     javascript: 'JavaScript 框架',
     vue: 'Vue JS',
     react: 'React JS',
+    graphQL: 'GraphQL',
     about: '关于我',
     documentation: '文档',
     guide: '引导页',

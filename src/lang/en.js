@@ -8,6 +8,7 @@ export default {
     javascript: 'JavaScript Framework',
     vue: 'Vue JS',
     react: 'React JS',
+    graphQL: 'GraphQL',
     about: 'About',
     documentation: 'Documentation',
     guide: 'Guide',
