@@ -65,7 +65,7 @@ const actions = {
     // console.log('getInfo state', state)
     return new Promise((resolve, reject) => {
       getInfo().then(response => {
-        // console.log('getInfo', response)
+        console.log('getInfo', response)
         const { login } = response
 
         if (!login) {

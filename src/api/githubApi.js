@@ -2,6 +2,14 @@ import axios from 'axios'
 import request from '@/utils/request'
 import requestcommenter from '@/utils/request-commenter'
 
+// 查询readme
+export function getReadme() {
+  return request({
+    url: '/repos/PhotonAlpha/blogs/readme',
+    method: 'get'
+  })
+}
+
 // 查询父master的结构
 export function getMasterTrees(params) {
   return request({

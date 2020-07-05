@@ -86,7 +86,7 @@ export default {
       return moment(timestamp).format('YYYY/MM/DD')
     },
     handleRecommendedClick(data) {
-      this.$emit('handlerCategory', { ...data, subItem: true })
+      this.$emit('handlerCategory', { ...data, subItem: true, label: data.name })
     }
   }
 }
