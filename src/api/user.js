@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import requestcommenter from '@/utils/request-commenter'
 
 export function login(data) {
   return request({
@@ -8,11 +9,17 @@ export function login(data) {
   })
 }
 
-export function getInfo(token) {
+export function getInfo() {
   return request({
     url: '/user',
-    method: 'get',
-    params: { access_token: token }
+    method: 'get'
+  })
+}
+
+export function getCommenterInfo() {
+  return requestcommenter({
+    url: '/user',
+    method: 'get'
   })
 }
 

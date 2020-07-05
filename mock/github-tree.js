@@ -1554,6 +1554,112 @@ const reactions = [
   }
 ]
 
+const createIssues = {
+  'url': 'https://api.github.com/repos/PhotonAlpha/blogs/issues/15',
+  'repository_url': 'https://api.github.com/repos/PhotonAlpha/blogs',
+  'labels_url': 'https://api.github.com/repos/PhotonAlpha/blogs/issues/15/labels{/name}',
+  'comments_url': 'https://api.github.com/repos/PhotonAlpha/blogs/issues/15/comments',
+  'events_url': 'https://api.github.com/repos/PhotonAlpha/blogs/issues/15/events',
+  'html_url': 'https://github.com/PhotonAlpha/blogs/issues/15',
+  'id': 650837661,
+  'node_id': 'MDU6SXNzdWU2NTA4Mzc2NjE=',
+  'number': 15,
+  'title': 'Me too',
+  'user': {
+    'login': 'ethan-creed',
+    'id': 57406646,
+    'node_id': 'MDQ6VXNlcjU3NDA2NjQ2',
+    'avatar_url': 'https://avatars2.githubusercontent.com/u/57406646?v=4',
+    'gravatar_id': '',
+    'url': 'https://api.github.com/users/ethan-creed',
+    'html_url': 'https://github.com/ethan-creed',
+    'followers_url': 'https://api.github.com/users/ethan-creed/followers',
+    'following_url': 'https://api.github.com/users/ethan-creed/following{/other_user}',
+    'gists_url': 'https://api.github.com/users/ethan-creed/gists{/gist_id}',
+    'starred_url': 'https://api.github.com/users/ethan-creed/starred{/owner}{/repo}',
+    'subscriptions_url': 'https://api.github.com/users/ethan-creed/subscriptions',
+    'organizations_url': 'https://api.github.com/users/ethan-creed/orgs',
+    'repos_url': 'https://api.github.com/users/ethan-creed/repos',
+    'events_url': 'https://api.github.com/users/ethan-creed/events{/privacy}',
+    'received_events_url': 'https://api.github.com/users/ethan-creed/received_events',
+    'type': 'User',
+    'site_admin': false
+  },
+  'labels': [],
+  'state': 'open',
+  'locked': false,
+  'assignee': null,
+  'assignees': [],
+  'milestone': null,
+  'comments': 0,
+  'created_at': '2020-07-04T06:33:00Z',
+  'updated_at': '2020-07-04T06:33:00Z',
+  'closed_at': null,
+  'author_association': 'NONE',
+  'active_lock_reason': null,
+  'body': 'issue body',
+  'closed_by': null
+}
+
+const createComment = {
+  'url': 'https://api.github.com/repos/PhotonAlpha/blogs/issues/comments/653725828',
+  'html_url': 'https://github.com/PhotonAlpha/blogs/issues/5#issuecomment-653725828',
+  'issue_url': 'https://api.github.com/repos/PhotonAlpha/blogs/issues/5',
+  'id': 653725828,
+  'node_id': 'MDEyOklzc3VlQ29tbWVudDY1MzcyNTgyOA==',
+  'user': {
+    'login': 'ethan-creed',
+    'id': 57406646,
+    'node_id': 'MDQ6VXNlcjU3NDA2NjQ2',
+    'avatar_url': 'https://avatars2.githubusercontent.com/u/57406646?v=4',
+    'gravatar_id': '',
+    'url': 'https://api.github.com/users/ethan-creed',
+    'html_url': 'https://github.com/ethan-creed',
+    'followers_url': 'https://api.github.com/users/ethan-creed/followers',
+    'following_url': 'https://api.github.com/users/ethan-creed/following{/other_user}',
+    'gists_url': 'https://api.github.com/users/ethan-creed/gists{/gist_id}',
+    'starred_url': 'https://api.github.com/users/ethan-creed/starred{/owner}{/repo}',
+    'subscriptions_url': 'https://api.github.com/users/ethan-creed/subscriptions',
+    'organizations_url': 'https://api.github.com/users/ethan-creed/orgs',
+    'repos_url': 'https://api.github.com/users/ethan-creed/repos',
+    'events_url': 'https://api.github.com/users/ethan-creed/events{/privacy}',
+    'received_events_url': 'https://api.github.com/users/ethan-creed/received_events',
+    'type': 'User',
+    'site_admin': false
+  },
+  'created_at': '2020-07-04T05:56:04Z',
+  'updated_at': '2020-07-04T05:56:04Z',
+  'author_association': 'NONE',
+  'body': 'Me too'
+}
+
+const createReaction = {
+  'id': 76928449,
+  'node_id': 'MDg6UmVhY3Rpb243NjkyODQ0OQ==',
+  'user': {
+    'login': 'ethan-creed',
+    'id': 57406646,
+    'node_id': 'MDQ6VXNlcjU3NDA2NjQ2',
+    'avatar_url': 'https://avatars2.githubusercontent.com/u/57406646?v=4',
+    'gravatar_id': '',
+    'url': 'https://api.github.com/users/ethan-creed',
+    'html_url': 'https://github.com/ethan-creed',
+    'followers_url': 'https://api.github.com/users/ethan-creed/followers',
+    'following_url': 'https://api.github.com/users/ethan-creed/following{/other_user}',
+    'gists_url': 'https://api.github.com/users/ethan-creed/gists{/gist_id}',
+    'starred_url': 'https://api.github.com/users/ethan-creed/starred{/owner}{/repo}',
+    'subscriptions_url': 'https://api.github.com/users/ethan-creed/subscriptions',
+    'organizations_url': 'https://api.github.com/users/ethan-creed/orgs',
+    'repos_url': 'https://api.github.com/users/ethan-creed/repos',
+    'events_url': 'https://api.github.com/users/ethan-creed/events{/privacy}',
+    'received_events_url': 'https://api.github.com/users/ethan-creed/received_events',
+    'type': 'User',
+    'site_admin': false
+  },
+  'content': 'heart',
+  'created_at': '2020-07-04T06:28:53Z'
+}
+
 export default [
   // get all categoary trees
   {
@@ -1624,6 +1730,46 @@ export default [
     type: 'get',
     response: _ => {
       return blogs
+    }
+  },
+  // get access token
+  {
+    url: '/cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token',
+    type: 'post',
+    response: _ => {
+      return 'access_token=e370a92d73d0c6466fde9cb5dfaf6e3e8e7f46b6&scope=public_repo&token_type=bearer'
+    }
+  },
+  // mock create issues
+  {
+    url: '/repos/PhotonAlpha/blogs/issues',
+    type: 'post',
+    response: _ => {
+      return createIssues
+    }
+  },
+  // add comment
+  {
+    url: '/repos/PhotonAlpha/blogs/issues/[A-Za-z0-9]*/comments',
+    type: 'post',
+    response: _ => {
+      return createComment
+    }
+  },
+  // add reaction
+  {
+    url: '/repos/PhotonAlpha/blogs/issues/comments/[A-Za-z0-9]*/reactions',
+    type: 'post',
+    response: _ => {
+      return createReaction
+    }
+  },
+  // delete reaction
+  {
+    url: '/repos/PhotonAlpha/blogs/issues/comments/[A-Za-z0-9]*/reactions/[A-Za-z0-9]*',
+    type: 'delete',
+    response: _ => {
+      return createReaction
     }
   }
 ]

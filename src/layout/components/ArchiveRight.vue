@@ -2,7 +2,7 @@
   <div>
     <el-card v-if="anchor && anchor.length > 0" class="box-directory">
       <div slot="header">
-        <span>Post Directory</span>
+        <span>{{ $t('navbar.anchor') }}</span>
       </div>
       <div>
         <el-tree
@@ -14,7 +14,7 @@
     </el-card>
     <el-card v-if="recommend && recommend.length > 0" class="box-article">
       <div slot="header" class="item-title">
-        <span>最新文章</span>
+        <span>{{ $t('navbar.lArticle') }}</span>
       </div>
       <el-collapse v-model="activeName" accordion>
         <template v-for="(item, index) in recommend">
@@ -29,7 +29,7 @@
     </el-card>
     <el-card v-if="category && category.length > 0" class="box-card">
       <div slot="header">
-        <span>分类</span>
+        <span>{{ $t('navbar.category') }}</span>
       </div>
       <div>
         <el-tree
@@ -63,11 +63,11 @@ export default {
       return this.$store.getters.postDirectory
     },
     category() {
-      console.log('category', this.$store.getters.category)
+      // console.log('category', this.$store.getters.category)
       return this.$store.getters.category
     },
     recommend() {
-      console.log('recommend', this.$store.getters.latestRecommend)
+      // console.log('recommend', this.$store.getters.latestRecommend)
       return this.$store.getters.latestRecommend
     }
   },
@@ -76,7 +76,7 @@ export default {
       this.$emit('handlerCategory', data)
     },
     handlePostClick(data) {
-      console.log(data)
+      // console.log(data)
       this.$scrollTo(data.element, 500)
     },
     loadNode(node, resolve) {

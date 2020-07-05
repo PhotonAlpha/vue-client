@@ -1,4 +1,6 @@
+import axios from 'axios'
 import request from '@/utils/request'
+import requestcommenter from '@/utils/request-commenter'
 
 // 查询父master的结构
 export function getMasterTrees(params) {
@@ -30,14 +32,6 @@ export function getComments(issue_id) {
     method: 'get'
   })
 }
-// 创建issue,用作评论栏
-export function createIssue(data) {
-  return request({
-    url: `/repos/PhotonAlpha/blogs/issues`,
-    method: 'post',
-    data
-  })
-}
 
 // 查询日志内容
 export function getBlog(sha) {
@@ -51,6 +45,58 @@ export function getBlog(sha) {
 export function getCommentReactions(commentId) {
   return request({
     url: `/repos/PhotonAlpha/blogs/issues/comments/${commentId}/reactions`,
+    headers: { Accept: 'application/vnd.github.squirrel-girl-preview' },
     method: 'get'
+  })
+}
+
+// 查询日志内容
+export function authGithub(params) {
+  // create an axios instance
+  const service = axios.create({
+    baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+    // withCredentials: true, // send cookies when cross-domain requests
+    timeout: 5000 // request timeout
+  })
+  return service({
+    url: `https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token`,
+    method: 'post',
+    params
+  })
+}
+
+// 创建issue,用作评论栏
+export function createIssue(data) {
+  return request({
+    url: `/repos/PhotonAlpha/blogs/issues`,
+    method: 'post',
+    data
+  })
+}
+
+// 添加评论
+export function addComment(issueId, data) {
+  return requestcommenter({
+    url: `/repos/PhotonAlpha/blogs/issues/${issueId}/comments`,
+    method: 'post',
+    data
+  })
+}
+// 添加reaction, add header Accept application/vnd.github.squirrel-girl-preview+json
+export function addCommentReaction(commentId, data) {
+  return requestcommenter({
+    url: `/repos/PhotonAlpha/blogs/issues/comments/${commentId}/reactions`,
+    method: 'post',
+    headers: { Accept: 'application/vnd.github.squirrel-girl-preview+json' },
+    data
+  })
+}
+
+// 删除reaction
+export function deleteCommentReaction(commentId, reactionId) {
+  return requestcommenter({
+    url: `/repos/PhotonAlpha/blogs/issues/comments/${commentId}/reactions/${reactionId}`,
+    method: 'delete',
+    headers: { Accept: 'application/vnd.github.squirrel-girl-preview+json' }
   })
 }

@@ -1,7 +1,16 @@
 <template>
   <el-card v-if="currentIssue" class="comment-list-card">
     <div slot="header" class="clearfix">
-      <span>{{ currentIssue.body }}</span>
+      <template v-if="currentIssue.title">
+        <span>{{ currentIssue.body }}</span>
+      </template>
+      <template v-else>
+        <el-alert
+          type="info"
+          description="未发现评论，成为第一个留言的人。"
+          show-icon
+        />
+      </template>
     </div>
     <template v-if="currentIssue.comments && currentIssue.comments.length > 0">
       <div v-for="item in currentIssue.comments" :key="item.id" class="box-card-item">
@@ -45,22 +54,12 @@ export default {
       }
     }
   },
-  data() {
-    return {
-      timeFormat: this.formatDateTime('2020-05-20T07:37:59Z'),
-      checkboxGroup4: ['上海'],
-      cities: ['上海', '北京', '广州', '深圳']
-    }
-  },
-  computed: {
-
-  },
   methods: {
     formatDateTime(date) {
       const createTime = moment(date)
       const now = moment()
       const days = now.diff(createTime, 'days')
-      console.log(days)
+      // console.log(days)
       if (days > 5) {
         return moment(date).format('YYYY-MM-DD')
       } else {

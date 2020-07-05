@@ -26,11 +26,12 @@
 
     <h1>Hi. I'm element2</h1>
     <!-- </el-scrollbar> -->
+
   </div>
+
 </template>
 
 <script>
-// import { L2Dwidget } from 'live2d-widget/lib/L2Dwidget.min.js'
 
 export default {
   data() {

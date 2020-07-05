@@ -1,5 +1,6 @@
 const getters = {
   commenterToken: state => state.user.commenterToken,
+  commenterDetails: state => state.user.commenterDetails,
   language: state => state.app.language,
   sidebar: state => state.app.sidebar,
   device: state => state.app.device,

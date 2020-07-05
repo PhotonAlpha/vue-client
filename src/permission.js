@@ -1,7 +1,8 @@
 import router from './router'
+import store from './store'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
-import { getToken } from '@/utils/auth' // get token from cookie
+import { getToken, getCommenterToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -15,15 +16,22 @@ router.beforeEach(async(to, from, next) => {
   // set page title
   document.title = getPageTitle(to.meta.title)
 
+  // check if commenter login already
+  const commenterToken = getCommenterToken()
+  if (commenterToken) {
+    await store.dispatch('user/getCommenterInfo')
+  }
+
   // determine whether the user has logged in
   const hasToken = getToken()
-  console.log('hasToken', hasToken)
+  // console.log('hasToken', hasToken)
   if (hasToken) {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
       next({ path: '/' })
       NProgress.done()
     } else {
+      await store.dispatch('user/getInfo')
       next()
       // 本作不需要login, 直接next
       // const hasGetUserInfo = store.getters.name

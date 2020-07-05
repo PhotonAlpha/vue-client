@@ -26,6 +26,14 @@ import MarkdownEditor from '@/components/MarkdownEditor'
 export default {
   name: 'CommentInput',
   components: { MarkdownEditor },
+  props: {
+    currentIssue: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
   data() {
     return {
       content: ``,
@@ -44,14 +52,16 @@ export default {
       return this.$store.getters.avatar
     },
     language() {
-      console.log('current language', this.languageTypeList[this.$store.getters.language])
+      // console.log('current language', this.languageTypeList[this.$store.getters.language])
       return this.languageTypeList[this.$store.getters.language]
     }
   },
   methods: {
     getComment() {
       const html = this.$refs.markdownEditor.getValue()
-      this.$emit('commitComment', html)
+      this.$refs.markdownEditor.resetValue()
+      console.log('commit issue:', this.currentIssue)
+      this.$emit('commitComment', { issueId: this.currentIssue.number, html: html })
     },
     signin() {
       this.$emit('sign', 'signin')

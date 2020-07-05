@@ -12,7 +12,7 @@
 
 <script>
 import gemoji from '@/api/name-to-emoji'
-import { getCommentReactions } from '@/api/githubApi'
+import { getCommentReactions, addCommentReaction, deleteCommentReaction } from '@/api/githubApi'
 
 const cityOptions = ['上海', '北京', '广州', '深圳']
 
@@ -29,7 +29,8 @@ export default {
     return {
       checkboxGroup1: [],
       cities: cityOptions,
-      reactions: []
+      reactions: [],
+      loading: null
     }
   },
   created() {
@@ -40,10 +41,13 @@ export default {
       return gemoji[name]
     },
     initReactions() {
+      const reactions = []
+      for (const k in gemoji) {
+        reactions.push({ content: k, user: { login: '', isCurrent: false }, amount: 0 })
+      }
       getCommentReactions(this.id).then(response => {
-        console.log('getCommentReactions', response)
+        // console.log('getCommentReactions', response)
         const loginUser = 'ethan-creed' // this.$store.getters.name
-        const reactions = []
         response.forEach(element => {
           let reaction = reactions.find(item => item.content === element.content)
           const isCurrentUser = loginUser === element.user.login
@@ -60,16 +64,44 @@ export default {
             this.checkboxGroup1.push(element.content)
           }
         })
-        console.log('final reaction', reactions)
+        // console.log('final reaction', reactions)
         this.reactions = reactions
       })
     },
     handleCheckedChange(value, item) {
-      console.log('checkboxGroup1', value, item)
+      // console.log('checkboxGroup1', value, item)
+      this.loading = this.$loading({ lock: true, text: 'Loading' })
       if (value) {
         item.amount += 1
+        addCommentReaction(this.id, { content: item.content }).then(response => {
+          // console.log('addCommentReaction', response)
+          const { id, user } = response
+          item.id = id
+          item.user = user
+        })
+          .catch(error => {
+            this.loading.close()
+            console.log('addCommentReaction encounter error:', error)
+            this.$message({
+              message: `${this.$t('messgae.unknownError')}`,
+              type: 'error'
+            })
+          }).finally(() => this.loading.close())
+        // this.$emit('commitReaction', { type: 'addReaction', reactionId: item.id, commentId: this.id, content: item.content })
       } else {
         item.amount -= 1
+        deleteCommentReaction(this.id, item.id).then(response => {
+          // console.log('removeReaction', response)
+        })
+          .catch(error => {
+            this.loading.close()
+            console.log('deleteCommentReaction encounter error:', error)
+            this.$message({
+              message: `${this.$t('messgae.unknownError')}`,
+              type: 'error'
+            })
+          }).finally(() => this.loading.close())
+        // this.$emit('commitReaction', { type: 'removeReaction', reactionId: item.id, commentId: this.id, content: item.content })
       }
     }
   }

@@ -104,7 +104,7 @@ export default {
       }
     },
     handleLazyLoadCategory(node, resolve) {
-      console.log('loadNode', node)
+      // console.log('loadNode', node)
       if (node.level === 0) {
         return resolve(this.category)
       }
@@ -129,8 +129,8 @@ export default {
     },
     handlerCategory(data) {
       if (data && data.subItem) {
-        // console.log('handlerCategory', data, CURRENT_TITLE)
-        localStorage.setItem(CURRENT_TITLE, data.name)
+        console.log('handlerCategory', data, CURRENT_TITLE)
+        localStorage.setItem(CURRENT_TITLE, data.label)
         this.$router.push({ name: 'spring-details', params: { sha: data.sha }})
       }
     }

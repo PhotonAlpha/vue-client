@@ -2,9 +2,9 @@
   <el-card class="comment-card">
     <div slot="header">
       <span>评论</span>
-      <el-dropdown v-if="avatar" :span="1" style="margin: auto 0px;float: right;">
+      <el-dropdown v-if="commenterProfile.avatar_url" :span="1" style="margin: auto 0px;float: right;">
         <span class="el-dropdown-link">
-          <el-avatar shape="square" :size="35" :src="avatar+'?imageView2/1/w/80/h/80'" />
+          <el-avatar shape="square" :size="35" :src="commenterProfile.avatar_url+'?imageView2/1/w/80/h/80'" />
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item @click.native="signout">
@@ -15,13 +15,12 @@
     </div>
     <div>
       <comment-list :current-issue="currentIssue" />
-      <comment-input @commitComment="commitComment" @sign="signin" />
+      <comment-input :current-issue="currentIssue" @commitComment="commitComment" @sign="signin" />
     </div>
   </el-card>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import CommentInput from './CommentInput'
 import CommentList from './CommentList'
 
@@ -40,11 +39,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'sidebar',
-      'avatar',
-      'device'
-    ])
+    commenterProfile() {
+      return this.$store.getters.commenterDetails
+    }
   },
   methods: {
     commitComment(html) {

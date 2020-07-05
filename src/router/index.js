@@ -118,12 +118,17 @@ export const constantRoutes = [
         meta: { title: 'react', icon: 'fas fa-bolt' }
       },
       {
-        path: '/react',
+        path: '/graphQL',
         name: 'graphQL',
         component: () => import('@/views/graphQL/index'),
         meta: { title: 'graphQL', icon: 'fas fa-tape' }
       }
     ]
+  },
+  {
+    path: '/auth',
+    component: () => import('@/views/auth/index'),
+    hidden: true
   },
   {
     path: '/about',

@@ -80,7 +80,10 @@ export default {
     logOut: '退出登录',
     profile: '个人中心',
     theme: '换肤',
-    size: '布局大小'
+    size: '布局大小',
+    lArticle: '最新文章',
+    category: '分类',
+    anchor: '锚点'
   },
   login: {
     title: '系统登录',
@@ -89,7 +92,10 @@ export default {
     password: '密码',
     any: '随便填',
     thirdparty: '第三方登录',
-    thirdpartyTips: '本地不能模拟，请结合自己业务进行模拟！！！'
+    thirdpartyTips: '本地不能模拟，请结合自己业务进行模拟！！！',
+    loginError: '登录遇到问题，该消息是 ',
+    unknownError: '登录遇到未知错误的问题',
+    successful: '登录成功，可以开始评论了！'
   },
   documentation: {
     documentation: '文档',
@@ -184,6 +190,7 @@ export default {
   },
   messgae: {
     switchLang: '修改语言成功',
-    switchLangFailure: '修改语言失败'
+    switchLangFailure: '修改语言失败',
+    unknownError: '遇到未知错误'
   }
 }

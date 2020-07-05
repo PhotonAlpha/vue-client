@@ -80,7 +80,10 @@ export default {
     logOut: 'Log Out',
     profile: 'Profile',
     theme: 'Theme',
-    size: 'Global Size'
+    size: 'Global Size',
+    lArticle: 'Latest Articles',
+    category: 'Categories',
+    anchor: 'Anchor'
   },
   login: {
     title: 'Login Form',
@@ -89,7 +92,10 @@ export default {
     password: 'Password',
     any: 'any',
     thirdparty: 'Or connect with',
-    thirdpartyTips: 'Can not be simulated on local, so please combine you own business simulation! ! !'
+    thirdpartyTips: 'Can not be simulated on local, so please combine you own business simulation! ! !',
+    loginError: 'login encountered a problem which message is ',
+    unknownError: 'login encountered a problem which is unknown error',
+    successful: 'Successful login, you can start commenting!'
   },
   documentation: {
     documentation: 'Documentation',
@@ -184,6 +190,7 @@ export default {
   },
   messgae: {
     switchLang: 'Switch Language Success',
-    switchLangFailure: 'Switch Language Failure'
+    switchLangFailure: 'Switch Language Failure',
+    unknownError: 'Unknown error encountered'
   }
 }

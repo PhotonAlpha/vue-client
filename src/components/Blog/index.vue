@@ -1,8 +1,9 @@
 <template>
   <div>
+    <el-backtop :bottom="260" :right="0" />
     <template v-if="blogVal">
       <vue-markdown id="markdown-content" class="dashboard-container markdown-body">{{ blogVal }}</vue-markdown>
-      <comment :current-issue="currentIssue" @commitComment="commitComment" @sign="sign" />
+      <comment :current-issue="currentIssue" @commitComment="commitComment" @sign="sign" @commitReaction="commitReaction" />
     </template>
     <template v-else>
       <el-alert
@@ -51,6 +52,9 @@ export default {
     },
     sign(action) {
       this.$emit('sign', action)
+    },
+    commitReaction(val) {
+      this.$emit('commitReaction', val)
     }
   }
 }

@@ -97,6 +97,9 @@ export default {
     },
     getValue() {
       return this.editor.getMarkdown()
+    },
+    resetValue(val) {
+      this.editor.reset()
     }
   }
 }

@@ -7,6 +7,11 @@ import Timeline from '@/components/Timeline'
 import { reconstructorTitle } from '@/utils'
 import { getMasterTrees, getDestinationTrees } from '@/api/githubApi'
 
+const options = {
+  lock: true,
+  text: 'Loading'
+}
+
 export default {
   name: 'CommonList',
   components: {
@@ -24,15 +29,23 @@ export default {
       masterTreeItems: [],
       nodeTreeItems: [],
       blogItems: [],
-      blogItemsPagination: []
+      blogItemsPagination: [],
+      loading: null
     }
   },
   created() {
     this.cleanPostDirectory()
     this.initData()
   },
+  destroyed() {
+    if (this.loading) {
+      this.loading.close()
+    }
+  },
   methods: {
     async initData() {
+      this.loading = this.$loading(options)
+
       this.masterTreeItems = await this.fetchMasterTrees()
       if (this.masterTreeItems.tree && Array.isArray(this.masterTreeItems.tree)) {
         const array = ['navigation']
@@ -56,15 +69,15 @@ export default {
           const blogTreeItems = await this.fetchNodeTreeItems(this.nodeTreeItems[0].sha)
           if (blogTreeItems && blogTreeItems.tree) {
             this.blogItems = reconstructorTitle(blogTreeItems.tree)
-            console.log('this.blogItems', this.blogItems)
+            // console.log('this.blogItems', this.blogItems)
             // 前三个日志为推荐选项
             let recommended = this.blogItems.slice(0, 3)
             recommended = recommended.map(item => {
               return { ...item, title: this.categoryName }
             })
             this.$store.dispatch('app/setLatestRecommend', recommended)
-
             this.blogItemsPagination = this.blogItems.slice(0, 10)
+            this.loading.close()
           }
         }
       }
@@ -72,10 +85,11 @@ export default {
     async fetchMasterTrees() {
       let result
       await getMasterTrees().then(response => {
-        console.log('getMasterTrees', response)
+        // console.log('getMasterTrees', response)
         result = response
       })
         .catch(error => {
+          this.loading.close()
           console.log('error occur', error)
         })
       return result
@@ -83,10 +97,11 @@ export default {
     async fetchNodeTreeItems(sha) {
       let result
       await getDestinationTrees(sha).then(response => {
-        console.log('getDestinationTrees', response)
+        // console.log('getDestinationTrees', response)
         result = response
       })
         .catch(error => {
+          this.loading.close()
           console.log('error occur', error)
         })
       return result
@@ -113,6 +128,6 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>
