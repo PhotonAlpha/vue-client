@@ -191,6 +191,7 @@ export default {
   messgae: {
     switchLang: '修改语言成功',
     switchLangFailure: '修改语言失败',
-    unknownError: '遇到未知错误'
+    unknownError: '遇到未知错误',
+    loginWarning: '请先登录哦'
   }
 }

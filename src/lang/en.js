@@ -191,6 +191,7 @@ export default {
   messgae: {
     switchLang: 'Switch Language Success',
     switchLangFailure: 'Switch Language Failure',
-    unknownError: 'Unknown error encountered'
+    unknownError: 'Unknown error encountered',
+    loginWarning: 'Please login first'
   }
 }

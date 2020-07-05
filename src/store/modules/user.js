@@ -65,7 +65,7 @@ const actions = {
     // console.log('getInfo state', state)
     return new Promise((resolve, reject) => {
       getInfo().then(response => {
-        console.log('getInfo', response)
+        // console.log('getInfo', response)
         const { login } = response
 
         if (!login) {
@@ -83,7 +83,7 @@ const actions = {
 
   // 获取评论登录者的账户信息
   getCommenterInfo({ commit, state }) {
-    console.log('getCommenterInfo state', state)
+    // console.log('getCommenterInfo state', state)
     return new Promise((resolve, reject) => {
       getCommenterInfo(state.commenterToken).then(response => {
         console.log('getCommenterInfo', response)

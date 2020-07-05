@@ -33,6 +33,11 @@ export default {
       loading: null
     }
   },
+  computed: {
+    commenterProfile() {
+      return this.$store.getters.commenterDetails
+    }
+  },
   created() {
     this.initReactions()
   },
@@ -69,6 +74,15 @@ export default {
       })
     },
     handleCheckedChange(value, item) {
+      if (!this.commenterProfile.avatar_url) {
+        this.$message({
+          showClose: true,
+          dangerouslyUseHTMLString: true,
+          type: 'warning',
+          message: `<i class="fa-3x fas fa-dragon"></i>  ${this.$t('messgae.loginWarning')}！`
+        })
+        return
+      }
       // console.log('checkboxGroup1', value, item)
       this.loading = this.$loading({ lock: true, text: 'Loading' })
       if (value) {
