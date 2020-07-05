@@ -26,11 +26,12 @@ import i18n from './lang' // internationalization
  *
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
+ * 此处会把mock引用进product
  */
-if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
+// if (process.env.NODE_ENV === 'production') {
+//   const { mockXHR } = require('../mock')
+//   mockXHR()
+// }
 
 import 'vue-navigation-bar/dist/vue-navigation-bar.css'
 import VueNavigationBar from 'vue-navigation-bar'
