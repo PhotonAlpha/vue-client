@@ -72,11 +72,32 @@ export function authGithub(params) {
     params
   })
 }
+// 查询IP
+export function getIp() {
+  // create an axios instance
+  const service = axios.create({
+    // withCredentials: true, // send cookies when cross-domain requests
+    timeout: 5000 // request timeout
+  })
+  return service({
+    url: `https://api.ipify.org/?format=json`,
+    method: 'get'
+  })
+}
 
 // 创建issue,用作评论栏
 export function createIssue(data) {
   return request({
     url: `/repos/PhotonAlpha/blogs/issues`,
+    method: 'post',
+    data
+  })
+}
+
+// 添加评论
+export function addAdminComment(issueId, data) {
+  return request({
+    url: `/repos/PhotonAlpha/blogs/issues/${issueId}/comments`,
     method: 'post',
     data
   })

@@ -57,6 +57,18 @@ export const constantRoutes = [
   //   ]
   // },
   {
+    path: '/java',
+    component: Layout,
+    children: [
+      {
+        path: '/java',
+        name: 'java',
+        component: () => import('@/views/java/index'),
+        meta: { title: 'java', icon: 'fab fa-java' }
+      }
+    ]
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/springboot',

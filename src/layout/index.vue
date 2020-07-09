@@ -36,9 +36,10 @@
 import { Sidebar, AppMain, Profile, ArchiveRight } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import getTrianglify from '@/utils/generator'
-import { getDestinationTrees } from '@/api/githubApi'
+import { getDestinationTrees, getIp, addAdminComment } from '@/api/githubApi'
 import { reconstructorTitle } from '@/utils'
 import { CURRENT_TITLE } from '@/utils/index'
+import moment from 'moment'
 
 export default {
   name: 'Layout',
@@ -85,6 +86,9 @@ export default {
   },
   mounted() {
     window.addEventListener('scroll', this.handleTabFix, true)
+    if (process.env.NODE_ENV === 'production') {
+      this.handlerReocrd()
+    }
   },
   methods: {
     handleClickOutside() {
@@ -133,6 +137,16 @@ export default {
         localStorage.setItem(CURRENT_TITLE, data.label)
         this.$router.push({ name: 'spring-details', params: { sha: data.sha }})
       }
+    },
+    handlerReocrd() {
+      const currentTime = moment().format('YYYY-MM-DD HH:mm:ss')
+      getIp().then(response => {
+        const { ip } = response.data
+        if (ip) {
+          addAdminComment(21, { body: `my suppoter login at ${currentTime} IP:${ip}` })
+        }
+      })
+        .catch(error => console.log(error))
     }
   },
   beforeRouteLeave(to, from, next) {

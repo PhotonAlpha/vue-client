@@ -36,3 +36,8 @@ https://github.com/login/oauth/authorize?client_id=22f33b7f43ec9ae6d0c9&scope=pu
 
 
 http://localhost:9528/auth?hash=f6de6f924fdbb5b8f3802f6a3e01976086d99b6a&code=b818e5a107875bde4226
+
+### Task List
+
+- [ ] record user IP
+- [ ] enhance markdown, can show big image

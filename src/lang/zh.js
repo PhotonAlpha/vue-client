@@ -1,6 +1,7 @@
 export default {
   route: {
     dashboard: '首页',
+    java: 'Java',
     spring: 'Spring',
     springboot: 'Spring Boot',
     springcloud: 'Spring Cloud',
