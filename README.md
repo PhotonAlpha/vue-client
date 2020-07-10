@@ -39,5 +39,5 @@ http://localhost:9528/auth?hash=f6de6f924fdbb5b8f3802f6a3e01976086d99b6a&code=b8
 
 ### Task List
 
-- [ ] record user IP
+- [ ] add comment function what is comment can be edit. 
 - [ ] enhance markdown, can show big image
