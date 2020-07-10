@@ -151,9 +151,9 @@ export default {
       return path.resolve(basePath, routePath)
     },
     vnbItemClicked(text) {
-      if (text === 'About') {
-        alert("'About' was selected.")
-      }
+      // if (text === 'About') {
+      //   alert("'About' was selected.")
+      // }
     },
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')

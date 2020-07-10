@@ -138,7 +138,7 @@ export default {
         this.$router.push({ name: 'spring-details', params: { sha: data.sha }})
       }
     },
-    handlerReocrd() {
+    async handlerReocrd() {
       const currentTime = moment().format('YYYY-MM-DD HH:mm:ss')
       getIp().then(response => {
         const { ip } = response.data

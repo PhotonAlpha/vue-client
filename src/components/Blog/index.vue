@@ -2,7 +2,7 @@
   <div>
     <el-backtop :bottom="260" :right="0" />
     <template v-if="blogVal">
-      <vue-markdown id="markdown-content" class="dashboard-container markdown-body">{{ blogVal }}</vue-markdown>
+      <markdown id="markdown-content" class="dashboard-container markdown-body" :content="blogVal" />
       <comment :current-issue="currentIssue" @commitComment="commitComment" @sign="sign" @commitReaction="commitReaction" />
     </template>
     <template v-else>
@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import VueMarkdown from 'vue-markdown'
+import Markdown from '@/components/Markdown'
 import { Base64 } from 'js-base64'
 import Comment from '@/components/Comment'
 
 export default {
   name: 'Blog',
   components: {
-    VueMarkdown,
+    Markdown,
     Comment
   },
   props: {

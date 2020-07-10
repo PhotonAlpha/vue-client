@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <!-- <el-scrollbar class="page-component__scrollbar"> -->
-    <el-backtop />
+  <!-- <div id="app"> -->
+  <!-- <el-scrollbar class="page-component__scrollbar"> -->
+  <!-- <el-backtop />
     <button @click="scollerTo()">
       Scroll to #element
     </button>
@@ -24,19 +24,25 @@
 
     <h1 id="element">Hi. I'm element</h1>
 
-    <h1>Hi. I'm element2</h1>
-    <!-- </el-scrollbar> -->
+    <h1>Hi. I'm element2</h1> -->
+  <!-- </el-scrollbar> -->
 
-  </div>
+  <!-- </div> -->
+  <markdown :content="content" />
 
 </template>
 
 <script>
+import Markdown from '@/components/Markdown'
+import MarkdownText from './example'
 
 export default {
+  components: {
+    Markdown
+  },
   data() {
     return {
-      userList: []
+      content: MarkdownText
     }
   },
   created() {
@@ -60,6 +66,12 @@ export default {
       const anchors2 = document.querySelectorAll('h1,h2,h3,h4,h5,h6')[1]
       console.log(anchors)
       this.$scrollTo(anchors2, 500)
+    },
+    use(plugin, options) {
+      this.md.use(plugin, options)
+    },
+    get() {
+      return this.md
     }
   }
 }

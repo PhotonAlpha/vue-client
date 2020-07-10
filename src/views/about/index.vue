@@ -1,5 +1,5 @@
 <template>
-  <blog :content="content" />
+  <blog ref="about-me" :content="content" />
 </template>
 
 <script>
@@ -21,19 +21,6 @@ export default {
       content: ''
     }
   },
-  updated() {
-    const select = document.querySelector('#markdown-content')
-    if (select) {
-      const anchors = Array.from(select.querySelectorAll('h1,h2,h3,h4,h5,h6'))
-      console.log('anchors', anchors)
-      const anchorsVal = []
-      for (const item of anchors) {
-        // console.log('ancher', item)
-        anchorsVal.push(this.treeDecoration(item))
-      }
-      this.$store.dispatch('app/setPostDirectory', anchorsVal)
-    }
-  },
   created() {
     this.initReadme()
   },
@@ -47,7 +34,10 @@ export default {
           console.log('initReadme', error)
           this.loading.close()
         })
-        .finally(() => this.loading.close())
+        .finally(() => {
+          this.loading.close()
+          this.$nextTick(() => this.initDomTree())
+        })
     },
     treeDecoration(item) {
       const level = item.tagName.substring(1, 2)
@@ -60,6 +50,19 @@ export default {
       }
       // console.log('content:', content)
       return { label: content, element: item }
+    },
+    initDomTree() {
+      const select = document.querySelector('#markdown-content')
+      if (select) {
+        const anchors = Array.from(select.querySelectorAll('h1,h2,h3,h4,h5,h6'))
+        // console.log('anchors', anchors)
+        const anchorsVal = []
+        for (const item of anchors) {
+        // console.log('ancher', item)
+          anchorsVal.push(this.treeDecoration(item))
+        }
+        this.$store.dispatch('app/setPostDirectory', anchorsVal)
+      }
     }
   }
 }

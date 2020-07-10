@@ -25,7 +25,7 @@
                 <span class="box-link-span">commented on  {{ formatDateTime(item.created_at) }}</span>
               </div>
               <div style="margin-left: 20px;">
-                <vue-markdown id="markdown-content" class="markdown-body">{{ item.body }}</vue-markdown>
+                <markdown id="markdown-content" :content="item.body" class="markdown-body" />
               </div>
               <reaction :id="item.id" />
             </el-card>
@@ -37,13 +37,13 @@
 </template>
 <script>
 import moment from 'moment'
-import VueMarkdown from 'vue-markdown'
+import Markdown from '@/components/Markdown'
 import Reaction from '@/components/Comment/Reaction'
 
 export default {
   name: 'CommentList',
   components: {
-    VueMarkdown,
+    Markdown,
     Reaction
   },
   props: {

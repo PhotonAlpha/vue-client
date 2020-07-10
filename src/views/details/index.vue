@@ -44,7 +44,7 @@ export default {
     const select = document.querySelector('#markdown-content')
     if (select) {
       const anchors = Array.from(select.querySelectorAll('h1,h2,h3,h4,h5,h6'))
-      console.log('anchors', anchors)
+      // console.log('anchors', anchors)
       const anchorsVal = []
       for (const item of anchors) {
         // console.log('ancher', item)
@@ -64,7 +64,10 @@ export default {
           console.log('getBlogDetails', error)
           this.loading.close()
         })
-        .finally(() => this.loading.close())
+        .finally(() => {
+          this.loading.close()
+          this.$nextTick(() => this.initDomTree())
+        })
     },
     treeDecoration(item) {
       const level = item.tagName.substring(1, 2)
@@ -102,6 +105,19 @@ export default {
           console.log('get Comments', this.currentIssue)
         })
           .catch(err => console.log(err))
+      }
+    },
+    initDomTree() {
+      const select = document.querySelector('#markdown-content')
+      if (select) {
+        const anchors = Array.from(select.querySelectorAll('h1,h2,h3,h4,h5,h6'))
+        // console.log('anchors', anchors)
+        const anchorsVal = []
+        for (const item of anchors) {
+        // console.log('ancher', item)
+          anchorsVal.push(this.treeDecoration(item))
+        }
+        this.$store.dispatch('app/setPostDirectory', anchorsVal)
       }
     },
     addCommentEvent(issueId, html) {
